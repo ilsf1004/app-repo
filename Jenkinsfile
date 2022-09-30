@@ -18,7 +18,7 @@ podTemplate(label: 'docker-build',
   ]
 ) {
     node('docker-build') {
-        def dockerHubCred = <your_dockerhub_cred>
+        def dockerHubCred = dockerhub_token
         def appImage
         
         stage('Checkout'){
@@ -30,7 +30,7 @@ podTemplate(label: 'docker-build',
         stage('Build'){
             container('docker'){
                 script {
-                    appImage = docker.build("<your-dockerhub-id>/node-hello-world")
+                    appImage = docker.build("dbswlgp99/node-hello-world")
                 }
             }
         }
@@ -49,7 +49,7 @@ podTemplate(label: 'docker-build',
         stage('Push'){
             container('docker'){
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', dockerHubCred){
+                    docker.withRegistry('https://hub.docker.com/', dockerhub_token){
                         appImage.push("${env.BUILD_NUMBER}")
                         appImage.push("latest")
                     }
