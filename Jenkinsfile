@@ -1,61 +1,14 @@
-podTemplate(label: 'docker-build', 
-  containers: [
-    containerTemplate(
-      name: 'git',
-      image: 'alpine/git',
-      command: 'cat',
-      ttyEnabled: true
-    ),
-    containerTemplate(
-      name: 'docker',
-      image: 'docker',
-      command: 'cat',
-      ttyEnabled: true
-    ),
-  ],
-  volumes: [ 
-    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'), 
-  ]
-) {
-    node('docker-build') {
-        def dockerHubCred = dockerhub_token
-        def appImage
-        
-        stage('Checkout'){
-            container('git'){
-                checkout scm
-            }
-        }
-        
-        stage('Build'){
-            container('docker'){
-                script {
-                    appImage = docker.build("dbswlgp99/node-hello-world")
-                }
-            }
-        }
-        
-        stage('Test'){
-            container('docker'){
-                script {
-                    appImage.inside {
-                        sh 'npm install'
-                        sh 'npm test'
-                    }
-                }
-            }
-        }
-
-        stage('Push'){
-            container('docker'){
-                script {
-                    docker.withRegistry('https://hub.docker.com/', dockerhub_token){
-                        appImage.push("${env.BUILD_NUMBER}")
-                        appImage.push("latest")
-                    }
-                }
-            }
-        }
+node {
+  stage('========== Clone repository ==========') {
+    checkout scm
+  }
+  stage('========== Build image ==========') {
+    app = docker.build("dbswlgp99/php-apache") # 저장소
+  }
+  stage('========== Push image ==========') {
+    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_dbswlgp99') { # Jenkins Credential 정보
+      app.push("${env.BUILD_NUMBER}") # 빌드 번호
+      app.push("latest") # 태그 정보
     }
-    
+  }
 }
