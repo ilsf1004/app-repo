@@ -1,1 +1,1 @@
-FROM php:latest
+FROM nginx:latest
