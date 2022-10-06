@@ -24,6 +24,7 @@ node {
       sh "sed -i 's/jenkins-nginx:.*/jenkins-nginx:${env.BUILD_NUMBER}/g' nginx-deploy.yaml"
       sh "git config --global user.name dbswlgp"
       sh "git config --global user.email 26017097@naver.com"
+      sh "git checkout -B main"
       withCredentials([usernamePassword(credentialsId: 'github_access_token', usernameVariable: 'dbswlgp', passwordVariable:'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')]) {
         sh "git add ."
         sh "git commit -m 'image version ${env.BUILD_NUMBER}'"
