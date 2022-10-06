@@ -16,7 +16,7 @@ node {
       branches: [[name: '*/main' ]],
       extensions: scm.extensions,
       userRemoteConfigs: [[
-        url: 'git@github.com:dbswlgp/deploy-repo.git',
+        url: 'https://github.com/dbswlgp/deploy-repo.git',
         credentialsId: 'jenkinds-ssh-private',
       ]]
     ])
