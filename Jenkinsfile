@@ -26,7 +26,6 @@ node {
       sh "git config --global user.email 26017097@naver.com"
       withCredentials([usernamePassword(credentialsId: 'github_access_token', usernameVariable: 'dbswlgp', passwordVariable:'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')]) {
         sh "git add ."
-        sh "git commit -m 'Ref ${env.gitlabSourceNamespace}/${env.gitlabSourceRepoName}@${env.GIT_COMMIT_SHORT}'"
         sh "git commit -m 'image version ${env.BUILD_NUMBER}'"
         sh "git push -u deploy HEAD:main"
       }
