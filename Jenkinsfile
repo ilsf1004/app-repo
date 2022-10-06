@@ -27,7 +27,7 @@ node {
       withCredentials([usernamePassword(credentialsId: 'github_access_token', usernameVariable: 'dbswlgp', passwordVariable:'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')]) {
         sh "git add ."
         sh "git commit -m 'image version ${env.BUILD_NUMBER}'"
-        sh "git push https://dbswlgp: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@github.com/dbswlgp/deploy-repo HEAD:main"
+        sh "git push https://dbswlgp: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@github.com/dbswlgp/deploy-repo HEAD:main"
       }
     }
   }
