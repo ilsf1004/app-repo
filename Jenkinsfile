@@ -31,4 +31,5 @@ node {
         sh "git push -u deploy HEAD:main"
       }
     }
+  }
 }
