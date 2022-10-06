@@ -24,7 +24,7 @@ node {
       sh "sed -i 's/jenkins-nginx:.*/jenkins-nginx:${env.BUILD_NUMBER}/g' nginx-deploy.yaml"
       sh "git config --global user.name dbswlgp"
       sh "git config --global user.email 26017097@naver.com"
-      withCredentials([usernamePassword(credentialsId: 'github_access_token', usernameVariable: 'dbswlgp', passwordVariable:'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')]) {
+      withCredentials([usernamePassword(credentialsId: 'github_access_token', usernameVariable: 'dbswlgp', passwordVariable:'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')]) {
         sh "git add ."
         sh "git commit -m 'image version ${env.BUILD_NUMBER}'"
         sh "git push https://dbswlgp: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@github.com/dbswlgp/deploy-repo HEAD:main"
