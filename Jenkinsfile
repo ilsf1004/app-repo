@@ -27,7 +27,7 @@ node {
       withCredentials([usernamePassword(credentialsId: 'github_access_token', usernameVariable: 'dbswlgp', passwordVariable:'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')]) {
         sh "git add ."
         sh "git commit -m 'image version ${env.BUILD_NUMBER}'"
-        sh "git push -u deploy HEAD:main"
+        sh "git push"
       }
     }
   }
