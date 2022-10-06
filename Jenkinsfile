@@ -11,7 +11,7 @@ node {
       app.push("latest")
     }
   }
-  stage('========= Deploy'==) {
+  stage('========== Deploy ==========') {
     checkout([$class: 'GitSCM',
       branches: [[name: '*/main' ]],
       extensions: scm.extensions,
