@@ -11,7 +11,7 @@ node {
       app.push("latest")
     }
   }
-  stage('========== Deploy ==========') {
+  stage('========== Manifest update ==========') {
     git branch: "main",
     credentialsId: 'github_access_token',
     url: 'https://github.com/dbswlgp/deploy-repo.git'
